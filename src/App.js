@@ -16,13 +16,18 @@ function App() {
   // let [count, setCount] = useState(0)
   const [tasks, setTasks] = useState(Tasks)
 
+  function addTask(task){
+    setTasks([...tasks, task])
+    console.log('Task Added Successfully')
+  }
+
 
   return (
     <div className="App shadow-lg">
         <TodoHeader />
         <SearchBar />
         <TaskList tasks={tasks}/>
-        <AddTodoForm />  
+        <AddTodoForm addTask={addTask} />  
 
     </div>
   );

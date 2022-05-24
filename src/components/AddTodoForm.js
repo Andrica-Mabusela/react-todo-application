@@ -59,17 +59,23 @@ function FormGroup({ type, name, placeholderText, labelText, inputValue }) {
     )
 }
 
-const AddTodoForm = React.forwardRef(() => {
+function AddTodoForm({addTask}){
 
     const formRef = useRef()
 
     function handleSubmit(event){
         event.preventDefault()
-       if( !formRef.current.task || formRef.current.date || formRef.current.title  ){
+
+        console.log(formRef.current.task)
+        console.log(formRef.current.date)
+        console.log(formRef.current.time)
+
+       if( !formRef.current.task.value || !formRef.current.date.value || !formRef.current.time.value  ){
             alert("All The fields are required")
        } else {
 
             // ADD A TASK
+            addTask({task: formRef.current.task, date: formRef.current.date, time: formRef.current.time})
 
        }
     }
@@ -86,6 +92,6 @@ const AddTodoForm = React.forwardRef(() => {
         </section>
     )
 
-})
+}
 
 export default AddTodoForm
