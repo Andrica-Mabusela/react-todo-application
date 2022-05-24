@@ -23,7 +23,7 @@ const actionButtonStyles = {
 
 function Task({ task, date, time }) {
 
-    console.log(task)
+
   return (
         <TaskItem className='shadow'>
             <div>{task}</div>

@@ -26,39 +26,9 @@
     },
     {
       "id": 5,
-      "task": "Register for duty",
-      "date": "2022/05/24",
-      "time": "07H50"
-    },
-    {
-      "id": 6,
       "task": "do something",
-      "date": "2022-05-17",
-      "time": "22:32"
-    },
-    {
-      "id": 7,
-      "task": "do something again",
-      "date": "2022-05-17",
-      "time": "22:58"
-    },
-    {
-      "id": 8,
-      "task": "dfvdfv",
       "date": "2022-05-23",
-      "time": "23:00"
-    },
-    {
-      "id": 9,
-      "task": "sdcdvfs",
-      "date": "2022-05-23",
-      "time": "23:02"
-    },
-    {
-      "id": 10,
-      "task": "thhyjyfhgb",
-      "date": "2022-05-25",
-      "time": "23:04"
+      "time": "23:25"
     }
   ]
 }

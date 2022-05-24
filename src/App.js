@@ -31,7 +31,7 @@ function App() {
         console.log(error)
       })
 
-  }, [])
+  }, [tasksLength])
   
 
   function addTask(task){
@@ -43,11 +43,12 @@ function App() {
         ...task
     })
     .then(res => {
-        setTasks(res.data)
-        setTasksLength(tasks.length)
+      console.log('Data returned from Post request', res.data)
+      setTasksLength(tasksLength + 1)
+      return setTasks(tasks)
     })
     .catch(error => console.log(error))
-    
+
   }
 
 
