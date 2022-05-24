@@ -13,10 +13,10 @@ const ButtonComponent = styled.button`
 
 // ButtonComponent.
 
-function Button({text}) {
+function Button({type, text}) {
   return (
     <React.Fragment>
-      <ButtonComponent>
+      <ButtonComponent type={type}>
         {text}
         </ButtonComponent>
     </React.Fragment>
