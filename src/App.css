@@ -2,4 +2,10 @@
   width: 80%;
   background: #fff;
   margin: 100px auto;
+  padding: 20px;
+}
+
+.Add-todo-wrapper {
+  margin: 40px 0;
+  /* color: rgb(250, 238, 133); */
 }
