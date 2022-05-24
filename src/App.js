@@ -16,28 +16,38 @@ function App() {
 
   // let [count, setCount] = useState(0)
   const [tasks, setTasks] = useState([])
+  const [tasksLength, setTasksLength] = useState(0)
+
+  //RUN THIS WHEN TASKS IS UPDATED
 
   useEffect(() => {
-      // axios('http://localhost:4000/tasks')
-      // .then(response => response.json())
-      // .then(jsonEncodedData => setTasks(jsonEncodedData))
-      // .catch(error => console.log(error))
 
       axios.get('http://localhost:4000/tasks')
       .then(res => {
-          return setTasks(res.data)
+          setTasks(res.data)
+          setTasksLength(res.data.length)
       })
       .catch(error => {
         console.log(error)
       })
-      
+
   }, [])
   
 
   function addTask(task){
     console.log('The Task is:', task)
-    setTasks([...tasks, task])
-    alert('Task Added Successfully')
+    setTasksLength(tasks.length)
+
+    axios.post('http://localhost:4000/tasks', {
+        id: tasksLength + 1,
+        ...task
+    })
+    .then(res => {
+        setTasks(res.data)
+        setTasksLength(tasks.length)
+    })
+    .catch(error => console.log(error))
+    
   }
 
 

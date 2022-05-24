@@ -7,7 +7,7 @@ function TaskList({tasks}) {
     <section style={{marginTop: '20px'}}>
         {
             tasks.map((task, index) => {
-                return <Task key={task.id} {...task} />
+                return <Task key={index} {...task} />
             })
         }
         

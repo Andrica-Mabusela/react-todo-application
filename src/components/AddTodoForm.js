@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
+import axios from 'axios'
 import styled from 'styled-components'
 
 import Button from './Button'
@@ -19,11 +20,7 @@ function FormGroup({ type, name, placeholderText, labelText }) {
     const [taskDate, setTaskDate] = useState('')
     const [taskTime, setTaskTime] = useState('')
 
-    useEffect( () => {
-        console.log('useEffect rendered')
-    }, [taskTitle])
-
-
+   
     function handleOnChange(event){
         console.log(taskTitle)
         console.log(taskDate)
@@ -53,6 +50,16 @@ function FormGroup({ type, name, placeholderText, labelText }) {
 function AddTodoForm({addTask}){
 
     const formRef = useRef()
+    const [tasksLength, setTasksLength] = useState(0)
+
+    // useEffect(() => {
+    //     axios.get('http://localhost:4000/tasks')
+    //     .then((res) => {
+    //         console.log('setting length of tasks')
+    //         setTasksLength(res.data.length)
+    //     })
+    //     .catch(error => console.log(error))
+    // }, [tasksLength])
 
     function handleSubmit(event){
         event.preventDefault()
@@ -65,7 +72,8 @@ function AddTodoForm({addTask}){
             alert("All The fields are required")
        } else {
 
-            // ADD A TASK
+
+            //ADD A TASK
             addTask({task: formRef.current.task.value, date: formRef.current.date.value, time: formRef.current.time.value})
             formRef.current.task.value = ''
             formRef.current.date.value = ''
