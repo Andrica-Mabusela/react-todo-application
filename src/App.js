@@ -4,6 +4,7 @@ import  TodoHeader  from './components/TodoHeader'
 import SearchBar from './components/SearchBar';
 import AddTodoForm from './components/AddTodoForm'
 import TaskList from './components/TaskList';
+import Modal from './components/Modal';
 
 // GET THE TASKS
 import { Tasks } from './Tasks';
@@ -33,7 +34,7 @@ function App() {
 
   }, [tasksLength])
   
-
+  // ADD TASK FUNCTION
   function addTask(task){
     console.log('The Task is:', task)
     setTasksLength(tasks.length)
@@ -51,12 +52,21 @@ function App() {
 
   }
 
+  // DELETE A TASK FUNCTION
+  function deleteTask(id){
+      axios.delete(`http://localhost:4000/tasks/${id}`)
+      .then(res => {
+          setTasksLength(tasksLength -1)
+      })
+      .catch(error => console.log(error))
+  }
+
 
   return (
     <div className="App shadow-lg">
         <TodoHeader />
         <SearchBar />
-        <TaskList tasks={tasks}/>
+        <TaskList tasks={tasks} deleteTask={deleteTask} />
         <AddTodoForm addTask={addTask} />  
 
     </div>

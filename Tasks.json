@@ -2,33 +2,15 @@
   "tasks": [
     {
       "id": 1,
-      "task": "Make up the bed",
-      "date": "2022/05/24",
-      "time": "06H00"
+      "task": "Watch Ozark",
+      "date": "2022-05-24",
+      "time": "02:47"
     },
     {
       "id": 2,
-      "task": "Take a shower",
-      "date": "2022/05/24",
-      "time": "06H15"
-    },
-    {
-      "id": 3,
-      "task": "Eat breakfast",
-      "date": "2022/05/24",
-      "time": "06H50"
-    },
-    {
-      "id": 4,
-      "task": "Go to work",
-      "date": "2022/05/24",
-      "time": "07H30"
-    },
-    {
-      "id": 5,
-      "task": "do something",
-      "date": "2022-05-23",
-      "time": "23:25"
+      "task": "Watch Game of Thrones",
+      "date": "2022-05-26",
+      "time": "02:48"
     }
   ]
 }

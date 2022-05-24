@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Button from './Button'
+import Modal from './Modal'
 
 const TaskItem = styled.section`
     background-color: lemonchiffon;
@@ -21,10 +22,32 @@ const actionButtonStyles = {
 }
 
 
-function Task({ task, date, time }) {
+function Task({ id, task, date, time, deleteTask }) {
 
+    const [modalId, setModalId] = useState(id)
+    const [modalTask, setModalTask] = useState(task)
+    const [modalDate, setModalDate] = useState(date)
+    const [modalTime, setModalTime] = useState(time)
+
+    useEffect(() => {
+        console.log('sdcjh')
+    })
+
+    function modalValues(myId, myTask, myDate, myTime){
+            console.log('FROM TASK', myId, myTask, myDate, myTime )
+            setModalId(myId)
+            setModalTask(myTask)
+            setModalDate(myDate)
+            setModalTime(myTime)
+
+            console.log(modalId, modalTask, modalDate, modalTime)
+    }
+
+    
 
   return (
+      <>
+        <Modal modalId={modalId} modalTask={modalTask} modalDate={modalDate} modalTime={modalTime} />
         <TaskItem className='shadow'>
             <div>{task}</div>
             <article style={{display: 'flex', alignItems: 'center'}}>
@@ -33,11 +56,12 @@ function Task({ task, date, time }) {
             </article>
 
             <div>
-               <button className='fas fa-edit' style={actionButtonStyles}></button>
-               <button className='fas fa-trash' style={actionButtonStyles}></button>
+               <button type="button" onClick={() => { modalValues(id, task, date, time) }} className='fas fa-edit' style={actionButtonStyles} data-toggle="modal" data-target="#exampleModalLong"></button>
+               <button type="button" className='fas fa-trash' style={actionButtonStyles} onClick={() => { deleteTask(id)} }></button>
             </div>
 
         </TaskItem>
+        </>
   )
 }
 
