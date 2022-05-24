@@ -18,7 +18,7 @@ function App() {
 
   function addTask(task){
     setTasks([...tasks, task])
-    console.log('Task Added Successfully')
+    alert('Task Added Successfully')
   }
 
 
