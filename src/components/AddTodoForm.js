@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 
 import Button from './Button'
@@ -13,32 +13,21 @@ const LabelComponent = styled.label`
     font-weight: 600;
 `
 
-function FormGroup({ type, name, placeholderText, labelText, inputValue }) {
+function FormGroup({ type, name, placeholderText, labelText }) {
 
     const [taskTitle, setTaskTitle] = useState('')
     const [taskDate, setTaskDate] = useState('')
     const [taskTime, setTaskTime] = useState('')
 
+    useEffect( () => {
+        console.log('useEffect rendered')
+    }, [taskTitle])
+
 
     function handleOnChange(event){
-
-        // console.log(taskTitle)
-        // if(event.target.name == 'task'){
-        //     setTaskTitle(event.target.value)
-        //     console.log(taskTitle)
-            
-        // } else if( event.target.name == 'date' ){
-        //     setTaskDate(event.target.value)
-        //     console.log(taskDate)
-        // }else if( event.target.name == 'time' ) {
-        //     setTaskTime(event.target.value)
-        //     console.log(taskTime)
-        // } 
-
         console.log(taskTitle)
         console.log(taskDate)
         console.log(taskTime)
-
     }
 
 
@@ -51,13 +40,15 @@ function FormGroup({ type, name, placeholderText, labelText, inputValue }) {
                 type={type}
                 name={name}
                 placeholder={placeholderText}
-                onChange={name == 'task' ? (event) => setTaskTitle(event.target.value) : name == 'date' ? (event) => setTaskDate(event.target.value) : (event) => setTaskTime(event.target.value) }
-                value={ name == 'task' ? taskTitle : name == 'date' ? taskDate : name == 'time' ? taskTime : '' }
+                onChange={name === 'task' ? (event) => setTaskTitle(event.target.value) : name === 'date' ? (event) => setTaskDate(event.target.value) : (event) => setTaskTime(event.target.value) }
+                value={ name === 'task' ? taskTitle : name === 'date' ? taskDate : name === 'time' ? taskTime : '' }
                 >
             </FormInputElement>
         </div>
     )
 }
+
+
 
 function AddTodoForm({addTask}){
 
@@ -75,8 +66,10 @@ function AddTodoForm({addTask}){
        } else {
 
             // ADD A TASK
-            addTask({task: formRef.current.task, date: formRef.current.date, time: formRef.current.time})
-
+            addTask({task: formRef.current.task.value, date: formRef.current.date.value, time: formRef.current.time.value})
+            formRef.current.task.value = ''
+            formRef.current.date.value = ''
+            formRef.current.time.value = ''
        }
     }
 
