@@ -11,10 +11,6 @@ function Modal({ modalData, isTaskUpdated }) {
     const [date, setDate] = useState('') 
     const [time, setTime] = useState('')
 
-    useEffect(() => {
-        console.log('Updated Task')
-    }, [isUpdated])
-
 
     function handleSubmit(event) {
         event.preventDefault()
@@ -25,14 +21,11 @@ function Modal({ modalData, isTaskUpdated }) {
             time: time ? time : modalData.time
         })
         .then(res => {
-            isTaskUpdated(true)
+            console.log('Task is updated')
         })
         .catch(error => { 
-            console.log(error.message) 
-            isTaskUpdated(false)    
+            console.log(error.message)    
         })
-
-        setIsUpdated(false)
 
     }
 
