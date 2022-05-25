@@ -18,6 +18,7 @@ function App() {
   // let [count, setCount] = useState(0)
   const [tasks, setTasks] = useState([])
   const [tasksLength, setTasksLength] = useState(0)
+  const [modalData, setModalData] = useState({id: '', task: '', date: '', time: ''})
 
   //RUN THIS WHEN TASKS IS UPDATED
 
@@ -61,12 +62,18 @@ function App() {
       .catch(error => console.log(error))
   }
 
+  // VALUES FOR THE CURRENT MODAL
+  function ModalDataSetter(x, y, z, a){
+      setModalData({id: x, task: y, date: z, time: a})
+  }
+
 
   return (
     <div className="App shadow-lg">
+      <Modal modalData={modalData} />
         <TodoHeader />
         <SearchBar />
-        <TaskList tasks={tasks} deleteTask={deleteTask} />
+        <TaskList tasks={tasks} ModalDataSetter={ModalDataSetter} deleteTask={deleteTask} />
         <AddTodoForm addTask={addTask} />  
 
     </div>

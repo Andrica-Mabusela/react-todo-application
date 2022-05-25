@@ -1,22 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 
-function Modal({ modalId, modalTask, modalDate, modalTime }) {
+function Modal({ modalData }) { 
 
-    console.log('values received:', modalId, modalTask, modalDate, modalTime)
+    const [isUpdated, setIsUpdated] = useState(false)
 
-    const [id, setId] = useState(modalId) 
-    const [task, setTask] = useState(modalTask) 
-    const [date, setDate] = useState(modalDate) 
-    const [time, setTime] = useState(modalTime) 
+    const [id, setId] = useState('') 
+    const [task, setTask] = useState('') 
+    const [date, setDate] = useState('') 
+    const [time, setTime] = useState('')
+
+    useEffect(() => {
+        console.log('Updated Task')
+    }, [isUpdated])
 
 
     function handleSubmit(event) {
-            event.preventDefault()
+        event.preventDefault()
+
+        axios.put(`http://localhost:4000/tasks/${modalData.id}`, {
+            task: task ? task : modalData.task,
+            date: date ? date : modalData.date,
+            time: time ? time : modalData.time
+        })
+        .then(res => {
+            setIsUpdated(true)
+        })
+        .catch(error => console.log(error.message))
+
+        setIsUpdated(false)
 
     }
-
 
   return (
     <section>
@@ -37,22 +52,22 @@ function Modal({ modalId, modalTask, modalDate, modalTime }) {
                     <div className="modal-body" style={{ backgroundColor: 'lemonchiffon' }}>
                         <form>
                             <div className='form-group'>
-                                <input type="text" placeholder='Add Task' value={modalTask} onChange={(event) => setTask(event.target.value)} className='form-control' />
+                                <input type="text" placeholder='Add Task' value={task ? task : modalData.task} onChange={(event) => setTask(event.target.value)} className='form-control' />
                             </div>
 
                             <div className='form-group'>
-                                <input type="date" placeholder='Add Date' value={modalDate} onChange={ (event) => setDate(event.target.value) } className='form-control' />
+                                <input type="date" placeholder='Add Date' value={date ? date : modalData.date} onChange={ (event) => setDate(event.target.value) } className='form-control' />
                             </div>
 
                             <div className='form-group'>
-                                <input type="time" placeholder='Add Time' value={modalTime} onChange={(event) => setTime(event.target.value)} className='form-control' />
+                                <input type="time" placeholder='Add Time' value={time ? time : modalData.time} onChange={(event) => setTime(event.target.value)} className='form-control' />
                             </div>
                         </form>
                     </div>
 
                     <div className="modal-footer" style={{ backgroundColor: 'lemonchiffon' }}>
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn" style={{backgroundColor: 'rgb(250, 238, 133)'}}>Update Task</button>
+                        <button type="button" className="btn" style={{backgroundColor: 'rgb(250, 238, 133)'}} onClick={handleSubmit}>Update Task</button>
                     </div>
                     </div>
                 </div>
