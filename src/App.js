@@ -19,6 +19,7 @@ function App() {
   const [tasks, setTasks] = useState([])
   const [tasksLength, setTasksLength] = useState(0)
   const [modalData, setModalData] = useState({id: '', task: '', date: '', time: ''})
+  const [isUpdated, setIsUpdated] = useState(false)
 
   //RUN THIS WHEN TASKS IS UPDATED
 
@@ -34,6 +35,15 @@ function App() {
       })
 
   }, [tasksLength])
+
+  useEffect(() => {
+    console.log('task is updated')
+  }, [isUpdated])
+
+  // FUNCTION TO CHECK IF TASK IS UPDATED
+  function isTaskUpdated(updateState){
+      setIsUpdated(updateState)
+  }
   
   // ADD TASK FUNCTION
   function addTask(task){
@@ -70,7 +80,7 @@ function App() {
 
   return (
     <div className="App shadow-lg">
-      <Modal modalData={modalData} />
+      <Modal modalData={modalData} isTaskUpdated={isTaskUpdated} />
         <TodoHeader />
         <SearchBar />
         <TaskList tasks={tasks} ModalDataSetter={ModalDataSetter} deleteTask={deleteTask} />

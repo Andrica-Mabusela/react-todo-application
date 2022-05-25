@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 
-function Modal({ modalData }) { 
+function Modal({ modalData, isTaskUpdated }) { 
 
     const [isUpdated, setIsUpdated] = useState(false)
 
@@ -25,9 +25,12 @@ function Modal({ modalData }) {
             time: time ? time : modalData.time
         })
         .then(res => {
-            setIsUpdated(true)
+            isTaskUpdated(true)
         })
-        .catch(error => console.log(error.message))
+        .catch(error => { 
+            console.log(error.message) 
+            isTaskUpdated(false)    
+        })
 
         setIsUpdated(false)
 
